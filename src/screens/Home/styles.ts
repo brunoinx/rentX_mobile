@@ -1,10 +1,12 @@
 import styled, { css } from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { FlatList } from "react-native";
+import { CarProps } from "../../components/Car";
 
 export const Container = styled.View`
   ${({ theme }) => css`
     flex: 1;
-    background-color: ${theme.colors.background_primary};
+    background-color: ${theme.colors.shape};
   `};
 `;
 
@@ -31,4 +33,17 @@ export const TotalCars = styled.Text`
     color: ${theme.colors.text_detail};
     font-family: ${theme.fonts.inter_500};
   `};
+`;
+
+export const ListCar = styled(FlatList as new () => FlatList<CarProps>).attrs({
+  contentContainerStyle: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 30
+  },
+  showsVerticalScrollIndicator: false
+})``;
+
+export const WrapperCard = styled.View`
+  margin-bottom: 14px;
 `;
