@@ -1,12 +1,16 @@
 import React from 'react';
-import { TouchableOpacityProps } from 'react-native';
+import { BorderlessButtonProps } from 'react-native-gesture-handler';
 
 import * as S from './styles';
 
-export function BackButton({ ...rest }: TouchableOpacityProps) {
+type Props = BorderlessButtonProps & {
+  color?: string;
+}
+
+export function BackButton({ color, ...rest }: Props) {
   return (
     <S.Container {...rest}>
-      <S.Icon />
+      <S.Icon color={color}/>
     </S.Container>
   );
 };

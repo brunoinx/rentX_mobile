@@ -1,17 +1,11 @@
 import styled from 'styled-components/native';
-import { TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { BorderlessButton } from 'react-native-gesture-handler';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export const Container = styled(TouchableOpacity)`
-  height: 30px;
-  width: 30px;
-  justify-content: center;
-  align-items: center;
-`;
+export const Container = styled(BorderlessButton)``;
 
-export const Icon = styled(Feather).attrs({
-  name: 'arrow-left',
-  size: 26,
-})`
-  color: ${({ theme }) => theme.colors.text};
-`;
+export const Icon = styled(MaterialIcons).attrs(({ theme, color }) => ({
+  name: "chevron-left",
+  size: 28,
+  color: !!color ? color : theme.colors.text
+}))``;

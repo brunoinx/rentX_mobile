@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled(TouchableOpacity)`
   ${({ theme }) => css`
@@ -35,7 +36,7 @@ export const WrapperInfoCar = styled.View`
 export const Label = styled.Text`
   ${({ theme }) => css`
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: ${RFValue(10)}px;
     margin-bottom: 4px;
     font-family: ${theme.fonts.archivo_500};
     color: ${theme.colors.text_detail};
@@ -44,7 +45,7 @@ export const Label = styled.Text`
 
 export const ModelCar = styled.Text`
   ${({ theme }) => css`
-    font-size: 15px;
+    font-size: ${RFValue(15)}px;
     font-family: ${theme.fonts.archivo_500};
     color: ${theme.colors.title};
   `}
@@ -59,7 +60,7 @@ export const WrapperIcon = styled.View`
 
 export const PriceText = styled.Text`
   ${({ theme }) => css`
-    font-size: 15px;
+    font-size: ${RFValue(15)}px;
     font-family: ${theme.fonts.archivo_500};
     color: ${theme.colors.main};
   `}

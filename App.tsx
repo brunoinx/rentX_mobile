@@ -14,7 +14,10 @@ import {
 import AppLoading from 'expo-app-loading';
 
 import { Home } from './src/screens/Home';
+import { CarDetails } from './src/screens/CarDetails';
+
 import theme from './src/styles/theme';
+import { View } from 'react-native';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -31,8 +34,16 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar />
-      <Home />
+      <StatusBar backgroundColor="transparent" translucent/>
+      <View
+        style={{
+          flex: 1,
+          paddingTop: 30,
+          backgroundColor: theme.colors.background_primary
+        }}
+      >
+        <Home />
+      </View>
     </ThemeProvider>
   );
 }
