@@ -18,6 +18,7 @@ import { CarDetails } from './src/screens/CarDetails';
 
 import theme from './src/styles/theme';
 import { View } from 'react-native';
+import { Scheduling } from './src/screens/Scheduling';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -34,15 +35,14 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar backgroundColor="transparent" translucent/>
+      <StatusBar backgroundColor="transparent"/>
       <View
         style={{
           flex: 1,
-          paddingTop: 30,
           backgroundColor: theme.colors.background_primary
         }}
       >
-        <Home />
+        <Scheduling />
       </View>
     </ThemeProvider>
   );
