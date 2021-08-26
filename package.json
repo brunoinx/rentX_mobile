@@ -10,6 +10,7 @@
   "dependencies": {
     "@expo-google-fonts/archivo": "^0.2.0",
     "@expo-google-fonts/inter": "^0.2.0",
+    "@expo/vector-icons": "^12.0.0",
     "expo": "~42.0.1",
     "expo-app-loading": "^1.1.2",
     "expo-font": "~9.2.1",
@@ -17,7 +18,10 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
-    "react-native-web": "~0.17.1",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-responsive-fontsize": "^0.5.1",
+    "react-native-svg": "12.1.1",
+    "react-native-web": "~0.13.12",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
@@ -26,7 +30,8 @@
     "@types/react-native": "~0.64.13",
     "@types/styled-components": "^5.1.12",
     "@types/styled-components-react-native": "^5.1.1",
-    "typescript": "~4.3.5"
+    "react-native-svg-transformer": "^0.14.3",
+    "typescript": "~4.0.0"
   },
   "private": true
 }
