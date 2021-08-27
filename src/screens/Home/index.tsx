@@ -2,7 +2,7 @@ import React from 'react'
 import { StatusBar } from 'react-native';
 
 import { Car } from '../../components/Car';
-import { cars } from '../../utils/listCars';
+import { cars } from '../../mocks/listCars';
 
 import Logo from '../../assets/logo.svg'
 
