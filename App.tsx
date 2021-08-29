@@ -14,7 +14,9 @@ import {
 } from '@expo-google-fonts/archivo';
 import AppLoading from 'expo-app-loading';
 
+import { ScheduleDone } from './src/screens/ScheduleDone';
 import { SchedulingDetails } from './src/screens/SchedulingDetails';
+
 import theme from './src/styles/theme';
 
 export default function App() {
@@ -32,14 +34,14 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar backgroundColor="transparent"/>
+      <StatusBar backgroundColor="transparent" />
       <View
         style={{
           flex: 1,
           backgroundColor: theme.colors.background_primary
         }}
       >
-        <SchedulingDetails />
+        <ScheduleDone />
       </View>
     </ThemeProvider>
   );

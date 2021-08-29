@@ -128,7 +128,6 @@ export const Arrow = styled(Feather).attrs({
   size: RFValue(24),
 })`
   color: ${({ theme }) => theme.colors.text};
-  margin-top: 12px;
 `;
 
 export const RentalPrice = styled.View`
@@ -166,7 +165,6 @@ export const PriceTotal = styled.Text`
   color: ${theme.colors.success};
   align-self: flex-end;
 `;
-
 
 export const WrapperButton = styled.View`
   width: 90%;
