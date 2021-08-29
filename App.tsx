@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { View } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import {
   useFonts,
@@ -13,12 +14,8 @@ import {
 } from '@expo-google-fonts/archivo';
 import AppLoading from 'expo-app-loading';
 
-import { Home } from './src/screens/Home';
-import { CarDetails } from './src/screens/CarDetails';
-
+import { SchedulingDetails } from './src/screens/SchedulingDetails';
 import theme from './src/styles/theme';
-import { View } from 'react-native';
-import { Scheduling } from './src/screens/Scheduling';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -42,7 +39,7 @@ export default function App() {
           backgroundColor: theme.colors.background_primary
         }}
       >
-        <Scheduling />
+        <SchedulingDetails />
       </View>
     </ThemeProvider>
   );
