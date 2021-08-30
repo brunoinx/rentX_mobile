@@ -7,9 +7,11 @@ import LogoSvg from '../../assets/icons/Union.svg';
 import CheckSvg from '../../assets/icons/vcheck.svg';
 
 import * as S from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 export function ScheduleDone() {
   const { width } = useWindowDimensions();
+  const { navigate } = useNavigation();
   const formatWidth = Math.round(width);
 
   return (
@@ -34,7 +36,7 @@ export function ScheduleDone() {
           pegar o seu automóvel.
         </S.Description>
 
-        <DoneButton title='OK' />
+        <DoneButton title='OK' onPress={() => navigate('Home')} />
       </S.Content>
     </S.Container>
   );
