@@ -1,4 +1,6 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Button } from '../../components/Button';
 import { Acessory } from '../../components/Acessory';
@@ -20,8 +22,11 @@ type CarDetailsProps = {
 }
 
 export function SchedulingDetails({ }: CarDetailsProps) {
+  const { navigate } = useNavigation();
+
   return (
     <S.Container>
+      <StatusBar barStyle="dark-content" />
       <S.Header>
         <BackButton onPress={() => { }} />
       </S.Header>
@@ -66,7 +71,7 @@ export function SchedulingDetails({ }: CarDetailsProps) {
             <S.DateTitle>Até</S.DateTitle>
             <S.DateValue>20/06/2021</S.DateValue>
           </S.DateInfo>
-        </S.RentalPeriod>        
+        </S.RentalPeriod>
 
         <S.RentalPrice>
           <S.WrapperInfoTotal>
@@ -79,7 +84,11 @@ export function SchedulingDetails({ }: CarDetailsProps) {
       </S.Content>
 
       <S.WrapperButton>
-        <Button title="Alugar agora" color="green"/>
+        <Button
+          title="Alugar agora"
+          color="green"
+          onPress={() => navigate('ScheduleDone')}
+        />
       </S.WrapperButton>
     </S.Container>
   );

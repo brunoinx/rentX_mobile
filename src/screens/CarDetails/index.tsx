@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 
 import { Button } from '../../components/Button';
 import { Acessory } from '../../components/Acessory';
@@ -15,15 +16,23 @@ import GearSvg from '../../assets/icons/gear.svg';
 import UserSvg from '../../assets/icons/user.svg';
 
 import * as S from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 type CarDetailsProps = {
 }
 
 export function CarDetails({ }: CarDetailsProps) {
+  const { goBack, navigate } = useNavigation();
+
   return (
     <S.Container>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <S.Header>
-        <BackButton onPress={() => { }} />
+        <BackButton onPress={() => goBack()} />
       </S.Header>
 
       <CarSlider imgUrl={[Lambo]} />
@@ -57,7 +66,10 @@ export function CarDetails({ }: CarDetailsProps) {
       </S.Content>
 
       <S.WrapperButton>
-        <Button title="Escolher período do aluguel" />
+        <Button
+          title="Escolher período do aluguel"
+          onPress={() => navigate('Scheduling')}
+        />
       </S.WrapperButton>
     </S.Container>
   );

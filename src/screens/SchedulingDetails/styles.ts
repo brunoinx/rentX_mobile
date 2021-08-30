@@ -6,13 +6,14 @@ import theme from "../../styles/theme";
 export const Container = styled.View`
   ${({ theme }) => css`
     flex: 1;
+    padding-top: 20px;
     background-color: ${theme.colors.background_secondary};
   `}
 `;
 
 export const Header = styled.View`
   width: 100%;
-  padding: 10px 16px 0;
+  padding: 15px 16px 0;
 
   flex-direction: row;
   justify-content: space-between;
@@ -128,7 +129,6 @@ export const Arrow = styled(Feather).attrs({
   size: RFValue(24),
 })`
   color: ${({ theme }) => theme.colors.text};
-  margin-top: 12px;
 `;
 
 export const RentalPrice = styled.View`
@@ -166,7 +166,6 @@ export const PriceTotal = styled.Text`
   color: ${theme.colors.success};
   align-self: flex-end;
 `;
-
 
 export const WrapperButton = styled.View`
   width: 90%;

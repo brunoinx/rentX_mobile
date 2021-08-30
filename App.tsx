@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { View } from 'react-native';
@@ -14,7 +15,8 @@ import {
 } from '@expo-google-fonts/archivo';
 import AppLoading from 'expo-app-loading';
 
-import { SchedulingDetails } from './src/screens/SchedulingDetails';
+import { Routes } from './src/routes';
+
 import theme from './src/styles/theme';
 
 export default function App() {
@@ -32,14 +34,14 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar backgroundColor="transparent"/>
+      <StatusBar backgroundColor="transparent" />
       <View
         style={{
           flex: 1,
           backgroundColor: theme.colors.background_primary
         }}
       >
-        <SchedulingDetails />
+        <Routes />
       </View>
     </ThemeProvider>
   );

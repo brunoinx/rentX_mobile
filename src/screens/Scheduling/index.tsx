@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { DateObject } from 'react-native-calendars';
 import { addDays, format } from 'date-fns';
 import { useTheme } from 'styled-components';
@@ -17,6 +18,7 @@ export function Scheduling() {
   const [inputInit, setInputInit] = useState('');
 
   const theme = useTheme();
+  const { navigate, goBack } = useNavigation();
 
   function selectDateCalendar(date: DateObject) {
     const newDate = new Date(date.timestamp);
@@ -44,7 +46,7 @@ export function Scheduling() {
       <S.Container>
         <StatusBar barStyle="light-content" />
         <S.Header>
-          <BackButton onPress={() => { }} color="#FFF" />
+          <BackButton onPress={() => goBack()} color="#FFF" />
 
           <S.Title>
             Escolha uma {'\n'}
@@ -82,7 +84,7 @@ export function Scheduling() {
         </S.Content>
 
         <S.WrapperButton>
-          <Button title="Confirmar"/>
+          <Button title="Confirmar" onPress={() => navigate('SchedulingDetails')} />
         </S.WrapperButton>
       </S.Container>
     </TouchableWithoutFeedback>
