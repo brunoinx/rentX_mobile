@@ -4,6 +4,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 export const Container = styled.View`
   ${({ theme }) => css`
     flex: 1;
+    padding-top: 28px;
     background-color: ${theme.colors.background_secondary};
   `}
 `;
@@ -18,7 +19,7 @@ export const Header = styled.View`
 
 export const Content = styled.ScrollView.attrs({
   contentContainerStyle: { paddingBottom: 50 },
-  showsVerticalScrollIndicator: false
+  showsVerticalScrollIndicator: false,
 })`
   width: 100%;
   padding: 12px 16px 0;

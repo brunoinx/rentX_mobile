@@ -1,5 +1,6 @@
 import React from 'react'
 import { StatusBar } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Car } from '../../components/Car';
 import { cars } from '../../mocks/listCars';
@@ -9,6 +10,8 @@ import Logo from '../../assets/logo.svg'
 import * as S from './styles';
 
 export function Home() {
+  const { navigate } = useNavigation();
+
   return (
     <S.Container>
       <StatusBar
@@ -32,7 +35,10 @@ export function Home() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <S.WrapperCard>
-            <Car data={item}/>
+            <Car
+              data={item}
+              onPress={() => navigate('CarDetails')}
+            />
           </S.WrapperCard>
         )}
       />

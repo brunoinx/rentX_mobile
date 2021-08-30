@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { View } from 'react-native';
@@ -14,8 +15,7 @@ import {
 } from '@expo-google-fonts/archivo';
 import AppLoading from 'expo-app-loading';
 
-import { ScheduleDone } from './src/screens/ScheduleDone';
-import { SchedulingDetails } from './src/screens/SchedulingDetails';
+import { Routes } from './src/routes';
 
 import theme from './src/styles/theme';
 
@@ -41,7 +41,7 @@ export default function App() {
           backgroundColor: theme.colors.background_primary
         }}
       >
-        <ScheduleDone />
+        <Routes />
       </View>
     </ThemeProvider>
   );

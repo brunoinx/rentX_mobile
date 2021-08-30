@@ -27,7 +27,6 @@ export function Calendar({ markedDate, handleChangeDate }: CalendarProps) {
 
   return (
     <CustomCalendar
-      current="2021-08-02"
       markedDates={markedDate}
       onDayPress={handleChangeDate}
       renderArrow={(direction) => (
@@ -55,6 +54,8 @@ export function Calendar({ markedDate, handleChangeDate }: CalendarProps) {
         }
       }}
       markingType={"custom"}
+      minDate={new Date()}
+      enableSwipeMonths
     />
   );
 };
