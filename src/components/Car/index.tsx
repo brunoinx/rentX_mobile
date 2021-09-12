@@ -1,37 +1,17 @@
 import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
+import { SvgProps } from 'react-native-svg';
+
+import { CarProps } from '../../dtos/CarDTO';
 
 import * as S from './styles';
 
-import EnergySvg from '../../assets/icons/energy.svg';
-
-type RentProps = {
-  period: string;
-  price: number;
-}
-
-type AcessoryProps = {
-  type: string;
-  name: string;
-}
-
-export type CarProps = {
-  id: string;
-  brand: string;
-  name: string;
-  about: string;
-  rent: RentProps;
-  fuel_type: string;
-  accessories: AcessoryProps[];
-  photos: string[];
-  thumbnail: string;
-}
-
 type Props = TouchableOpacityProps & {
   data: CarProps;
+  icon: React.FC<SvgProps>;
 }
 
-export function Car({ data, ...rest }: Props) {
+export function Car({ data, icon: Icon, ...rest }: Props) {
   const priceFormated = parseFloat(data.rent.price.toString()).toFixed(2);
 
   return (
@@ -51,7 +31,7 @@ export function Car({ data, ...rest }: Props) {
 
           <S.WrapperIcon>
             <S.PriceText>R$ {priceFormated}</S.PriceText>
-            <EnergySvg
+            <Icon
               height={22}
               width={22}
             />

@@ -3,15 +3,17 @@ import { StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { Car } from '../../components/Car';
+import { CarProps } from '../../dtos/CarDTO';
 
 import Logo from '../../assets/logo.svg'
 
 import * as S from './styles';
 import { api } from '../../services/api';
+import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
 
 export function Home() {
   const [listCars, setListCars] = useState([]);
-  const { navigate } = useNavigation();
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function fetchCars() {
@@ -26,6 +28,10 @@ export function Home() {
 
     fetchCars();
   }, []);
+
+  function handleNavigateToCarDetails(car: CarProps) {
+    navigation.navigate('CarDetails', { car });
+  }
 
   return (
     <S.Container>
@@ -52,7 +58,8 @@ export function Home() {
           <S.WrapperCard>
             <Car
               data={item}
-              onPress={() => navigate('CarDetails')}
+              icon={getAcessoryIcon(item.fuel_type)}
+              onPress={() => handleNavigateToCarDetails(item)}
             />
           </S.WrapperCard>
         )}

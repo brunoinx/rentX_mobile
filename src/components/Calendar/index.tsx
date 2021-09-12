@@ -5,30 +5,33 @@ import {
   Calendar as CustomCalendar,
   LocaleConfig,
   DateCallbackHandler,
-  CustomMarking,
+  PeriodMarking,
+  DateObject
 } from 'react-native-calendars';
 
 import { locale } from './locale';
 
-export type MarkedDateProps = {
-  [date: string]: CustomMarking;
+type MarkedDatesProps = {
+  [date: string]: PeriodMarking;
 }
 
 type CalendarProps = {
-  markedDate: MarkedDateProps;
-  handleChangeDate: DateCallbackHandler;
+  markedDates: MarkedDatesProps;
+  onDayPress: DateCallbackHandler;
 }
 
 LocaleConfig.locales['pt-br'] = locale;
 LocaleConfig.defaultLocale = 'pt-br';
 
-export function Calendar({ markedDate, handleChangeDate }: CalendarProps) {
+function Calendar({ markedDates, onDayPress }: CalendarProps) {
   const theme = useTheme();
 
   return (
     <CustomCalendar
-      markedDates={markedDate}
-      onDayPress={handleChangeDate}
+      minDate={new Date()}
+      markingType="period"
+      markedDates={markedDates}
+      onDayPress={onDayPress}
       renderArrow={(direction) => (
         <Feather
           size={24}
@@ -53,9 +56,13 @@ export function Calendar({ markedDate, handleChangeDate }: CalendarProps) {
           marginHorizontal: -15
         }
       }}
-      markingType={"custom"}
-      minDate={new Date()}
       enableSwipeMonths
     />
   );
 };
+
+export {
+  Calendar,
+  DateObject,
+  MarkedDatesProps
+}

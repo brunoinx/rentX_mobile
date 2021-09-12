@@ -1,28 +1,25 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Button } from '../../components/Button';
 import { Acessory } from '../../components/Acessory';
 import { CarSlider } from '../../components/CarSlider';
 import { BackButton } from '../../components/BackButton';
 
-import Lambo from '../../assets/images/Lambo.png';
-
-import SpeedSvg from '../../assets/icons/speed.svg';
-import UpSvg from '../../assets/icons/up.svg';
-import StrenghtSvg from "../../assets/icons/strenght.svg";
-import GasolineSvg from '../../assets/icons/gas.svg';
-import GearSvg from '../../assets/icons/gear.svg';
-import UserSvg from '../../assets/icons/user.svg';
+import { CarProps } from '../../dtos/CarDTO';
+import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
 
 import * as S from './styles';
-import { useNavigation } from '@react-navigation/native';
 
-type CarDetailsProps = {
+type Params = {
+  car: CarProps;
 }
 
-export function CarDetails({ }: CarDetailsProps) {
+export function CarDetails() {
   const { goBack, navigate } = useNavigation();
+  const { params } = useRoute();
+  const { car } = params as Params;
 
   return (
     <S.Container>
@@ -35,33 +32,33 @@ export function CarDetails({ }: CarDetailsProps) {
         <BackButton onPress={() => goBack()} />
       </S.Header>
 
-      <CarSlider imgUrl={[Lambo]} />
+      <CarSlider imgUrl={car.photos} />
 
       <S.Content>
         <S.Detail>
           <S.Wrapper>
-            <S.Label>Lamborghini</S.Label>
-            <S.ModelText>Huracan</S.ModelText>
+            <S.Label>{car.brand}</S.Label>
+            <S.ModelText>{car.name}</S.ModelText>
           </S.Wrapper>
 
           <S.Wrapper>
-            <S.Label>Ao dia</S.Label>
-            <S.PriceText>R$ 580</S.PriceText>
+            <S.Label>{car.rent.period}</S.Label>
+            <S.PriceText>{`R$ ${car.rent.price}`}</S.PriceText>
           </S.Wrapper>
         </S.Detail>
 
         <S.WrapperAcessory>
-          <Acessory name="380km/h" icon={SpeedSvg} />
-          <Acessory name="3.2s" icon={UpSvg} />
-          <Acessory name="800 HP" icon={StrenghtSvg} />
-          <Acessory name="Gasolina" icon={GasolineSvg} />
-          <Acessory name="Auto" icon={GearSvg} />
-          <Acessory name="2 pessoas" icon={UserSvg} />
+          {car.accessories.map(acessory => (
+            <Acessory
+              key={acessory.type}
+              name={acessory.name}
+              icon={getAcessoryIcon(acessory.type)}
+            />
+
+          ))}
         </S.WrapperAcessory>
 
-        <S.About>
-          Este é automóvel desportivo. Surgiu do lendário touro de lide indultado na praça Real Maestranza de Sevilla. É um belíssimo carro para quem gosta de acelerar.
-        </S.About>
+        <S.About>{car.about}</S.About>
 
       </S.Content>
 

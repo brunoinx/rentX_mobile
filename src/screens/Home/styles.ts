@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { FlatList } from "react-native";
-import { CarProps } from "../../components/Car";
+import { CarProps } from "../../dtos/CarDTO";
 
 export const Container = styled.View`
   ${({ theme }) => css`
@@ -39,9 +39,9 @@ export const ListCar = styled(FlatList as new () => FlatList<CarProps>).attrs({
   contentContainerStyle: {
     paddingHorizontal: 16,
     paddingTop: 16,
-    paddingBottom: 30
+    paddingBottom: 30,
   },
-  showsVerticalScrollIndicator: false
+  showsVerticalScrollIndicator: false,
 })``;
 
 export const WrapperCard = styled.View`

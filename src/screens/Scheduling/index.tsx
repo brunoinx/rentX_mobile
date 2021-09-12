@@ -1,44 +1,51 @@
 import React, { useState } from 'react';
 import { StatusBar, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { DateObject } from 'react-native-calendars';
 import { addDays, format } from 'date-fns';
-import { useTheme } from 'styled-components';
 
 import { Button } from '../../components/Button';
 import { BackButton } from '../../components/BackButton';
-import { Calendar, MarkedDateProps } from '../../components/Calendar';
+import { Calendar, DateObject, MarkedDatesProps } from '../../components/Calendar';
 
 import ArrowSvg from '../../assets/icons/arrow_right.svg';
 
 import * as S from './styles';
+import { generateInterval } from '../../components/Calendar/generateInterval';
 
 export function Scheduling() {
-  const [markedDate, setMarkedDate] = useState<MarkedDateProps>({} as MarkedDateProps);
-  const [inputInit, setInputInit] = useState('');
+  const [lastSelectedDate, setLastSelectedDate] = useState<DateObject>(
+    {} as DateObject
+  );
+  const [markedDates, setMarkedDates] = useState<MarkedDatesProps>(
+    {} as MarkedDatesProps
+  );
 
-  const theme = useTheme();
+  const [inputDateStart, setInputDateStart] = useState('');
+  const [inputDateEnd, setInputDateEnd] = useState('');
+
   const { navigate, goBack } = useNavigation();
 
-  function selectDateCalendar(date: DateObject) {
-    const newDate = new Date(date.timestamp);
-    const dateFormatted = format(addDays(newDate, 1), "yyyy-MM-dd");
+  function handleChangeDate(date: DateObject) {
+    let startPeriod = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+    let endPeriod = date;
 
-    const objectDate: MarkedDateProps = {
-      [dateFormatted]: {
-        customStyles: {
-          container: {
-            backgroundColor: theme.colors.main,
-          },
-          text: {
-            color: theme.colors.text_light,
-          },
-        },
-      },
-    };
+    if (startPeriod.timestamp > endPeriod.timestamp) {
+      startPeriod = endPeriod;
+      endPeriod = startPeriod;
+    }
 
-    setMarkedDate(objectDate);
-    setInputInit(format(new Date(dateFormatted), 'dd/MM/yyyy'));
+    setLastSelectedDate(endPeriod);
+
+    const interval = generateInterval(startPeriod, endPeriod);
+    setMarkedDates(interval);
+
+    if (startPeriod === date) {
+      setInputDateStart(format(addDays(startPeriod.timestamp, 1), 'dd/MM/yyyy'));
+      setInputDateEnd('');
+      return;
+    }
+
+    setInputDateEnd(format(addDays(endPeriod.timestamp, 1), 'dd/MM/yyyy'));
   }
 
   return (
@@ -60,7 +67,8 @@ export function Scheduling() {
               <S.DateInput
                 keyboardType="numeric"
                 maxLength={10}
-                value={inputInit}
+                editable={false}
+                value={inputDateStart}
               />
             </S.DateContainer>
 
@@ -71,6 +79,8 @@ export function Scheduling() {
               <S.DateInput
                 keyboardType="numeric"
                 maxLength={10}
+                editable={false}
+                value={inputDateEnd}
               />
             </S.DateContainer>
           </S.RentalPeriod>
@@ -78,8 +88,8 @@ export function Scheduling() {
 
         <S.Content>
           <Calendar
-            markedDate={markedDate}
-            handleChangeDate={selectDateCalendar}
+            markedDates={markedDates}
+            onDayPress={handleChangeDate}
           />
         </S.Content>
 

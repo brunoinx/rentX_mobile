@@ -23,7 +23,7 @@ const dots = [
 ];
 
 type Props = {
-  imgUrl: ImageSourcePropType[];
+  imgUrl: string[];
 }
 
 export function CarSlider({ imgUrl }: Props) {
@@ -38,8 +38,8 @@ export function CarSlider({ imgUrl }: Props) {
       </S.GroupDotsIndex>
 
       <S.ContentImage>
-        <S.CarImage 
-          source={ imgUrl[0] }
+        <S.CarImage
+          source={{ uri: imgUrl[0] }}
           resizeMode="contain"
         />
       </S.ContentImage>
