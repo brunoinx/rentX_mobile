@@ -1,6 +1,5 @@
 import { addDays, eachDayOfInterval, format } from "date-fns";
 import { DateObject, MarkedDatesProps } from ".";
-import { getPlatformDate } from "../../utils/getPlatformDate";
 import theme from "../../styles/theme";
 
 export function generateInterval(startDate: DateObject, endDate: DateObject) {
