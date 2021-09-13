@@ -61,8 +61,10 @@ export const DateInput = styled.TextInput`
   `}
 `;
 
-export const Content = styled.View`
-`;
+export const Content = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+  paddingBottom: 30,
+})``;
 
 export const WrapperButton = styled.View`
   padding: 10px 20px 16px;

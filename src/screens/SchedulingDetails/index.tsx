@@ -7,14 +7,7 @@ import { Acessory } from '../../components/Acessory';
 import { CarSlider } from '../../components/CarSlider';
 import { BackButton } from '../../components/BackButton';
 
-import Lambo from '../../assets/images/Lambo.png';
-
-import SpeedSvg from '../../assets/icons/speed.svg';
-import UpSvg from '../../assets/icons/up.svg';
-import StrenghtSvg from "../../assets/icons/strenght.svg";
-import GasolineSvg from '../../assets/icons/gas.svg';
-import GearSvg from '../../assets/icons/gear.svg';
-import UserSvg from '../../assets/icons/user.svg';
+import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
 
 import * as S from './styles';
 
@@ -22,16 +15,16 @@ type CarDetailsProps = {
 }
 
 export function SchedulingDetails({ }: CarDetailsProps) {
-  const { navigate } = useNavigation();
+  const { navigate, goBack } = useNavigation();
 
   return (
     <S.Container>
       <StatusBar barStyle="dark-content" />
       <S.Header>
-        <BackButton onPress={() => { }} />
+        <BackButton onPress={() => goBack()} />
       </S.Header>
 
-      <CarSlider imgUrl={[Lambo]} />
+      {/* <CarSlider imgUrl={[Lambo]} /> */}
 
       <S.Content>
         <S.Detail>
@@ -47,12 +40,7 @@ export function SchedulingDetails({ }: CarDetailsProps) {
         </S.Detail>
 
         <S.WrapperAcessory>
-          <Acessory name="380km/h" icon={SpeedSvg} />
-          <Acessory name="3.2s" icon={UpSvg} />
-          <Acessory name="800 HP" icon={StrenghtSvg} />
-          <Acessory name="Gasolina" icon={GasolineSvg} />
-          <Acessory name="Auto" icon={GearSvg} />
-          <Acessory name="2 pessoas" icon={UserSvg} />
+
         </S.WrapperAcessory>
 
         <S.RentalPeriod>
