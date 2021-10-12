@@ -1,6 +1,5 @@
 import { addDays, eachDayOfInterval, format } from "date-fns";
 import { DateObject, MarkedDatesProps } from ".";
-import { getPlatformDate } from "../../utils/getPlatformDate";
 import theme from "../../styles/theme";
 
 export function generateInterval(startDate: DateObject, endDate: DateObject) {
@@ -22,7 +21,7 @@ export function generateInterval(startDate: DateObject, endDate: DateObject) {
         textColor:
           startDate.dateString === date || endDate.dateString === date
             ? theme.colors.text_light
-            : theme.colors.main,
+            : theme.colors.text_light,
       },
     };
   });

@@ -3,6 +3,7 @@ import { TouchableOpacityProps } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 import { CarProps } from '../../dtos/CarDTO';
+import { maskMoney } from '../../utils/maskMoney';
 
 import * as S from './styles';
 
@@ -12,7 +13,7 @@ type Props = TouchableOpacityProps & {
 }
 
 export function Car({ data, icon: Icon, ...rest }: Props) {
-  const priceFormated = parseFloat(data.rent.price.toString()).toFixed(2);
+  const priceFormated = maskMoney(data.rent.price);
 
   return (
     <S.Container
@@ -30,7 +31,7 @@ export function Car({ data, icon: Icon, ...rest }: Props) {
           <S.Label>{data.rent.period}</S.Label>
 
           <S.WrapperIcon>
-            <S.PriceText>R$ {priceFormated}</S.PriceText>
+            <S.PriceText>{priceFormated}</S.PriceText>
             <Icon
               height={22}
               width={22}

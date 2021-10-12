@@ -20,11 +20,13 @@ export const Header = styled.View`
 `;
 
 export const Content = styled.ScrollView.attrs({
-  contentContainerStyle: { paddingBottom: 30 },
   showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingBottom: 30,
+    paddingHorizontal: 12,
+  },
 })`
   width: 100%;
-  padding: 12px 20px 0;
   margin-top: 18px;
 `;
 
@@ -67,11 +69,11 @@ export const PriceText = styled.Text`
 
 export const WrapperAcessory = styled.View`
   width: 100%;
-  margin: 16px 0 10px;
+  margin: 20px 0 10px;
 
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 export const RentalPeriod = styled.View`
@@ -169,7 +171,7 @@ export const PriceTotal = styled.Text`
 
 export const WrapperButton = styled.View`
   width: 90%;
-  padding-bottom: 20px;
+  padding-bottom: 18px;
   align-self: center;
   align-items: center;
 `;

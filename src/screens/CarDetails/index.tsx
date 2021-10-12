@@ -11,6 +11,7 @@ import { CarProps } from '../../dtos/CarDTO';
 import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
 
 import * as S from './styles';
+import { maskMoney } from '../../utils/maskMoney';
 
 type Params = {
   car: CarProps;
@@ -20,6 +21,12 @@ export function CarDetails() {
   const { goBack, navigate } = useNavigation();
   const { params } = useRoute();
   const { car } = params as Params;
+
+  const priceFormatted = maskMoney(car.rent.price);
+
+  function handleNavigateToScheduling() {
+    navigate('Scheduling', { car });
+  }
 
   return (
     <S.Container>
@@ -43,7 +50,7 @@ export function CarDetails() {
 
           <S.Wrapper>
             <S.Label>{car.rent.period}</S.Label>
-            <S.PriceText>{`R$ ${car.rent.price}`}</S.PriceText>
+            <S.PriceText>{priceFormatted}</S.PriceText>
           </S.Wrapper>
         </S.Detail>
 
@@ -65,7 +72,7 @@ export function CarDetails() {
       <S.WrapperButton>
         <Button
           title="Escolher período do aluguel"
-          onPress={() => navigate('Scheduling')}
+          onPress={handleNavigateToScheduling}
         />
       </S.WrapperButton>
     </S.Container>

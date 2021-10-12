@@ -43,7 +43,8 @@ function Calendar({ markedDates, onDayPress }: CalendarProps) {
         backgroundColor: theme.colors.background_secondary,
         borderBottomWidth: 0.5,
         paddingHorizontal: 10,
-        borderBottomColor: theme.colors.line
+        borderBottomColor: theme.colors.line,
+        height: 76
       }}
       theme={{
         textDayFontFamily: theme.fonts.archivo_400,

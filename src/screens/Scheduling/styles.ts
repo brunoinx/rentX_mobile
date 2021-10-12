@@ -9,7 +9,7 @@ export const Container = styled.View`
 export const Header = styled.View`
   ${({ theme }) => css`
     width: 100%;
-    padding: 34px 22px 26px;
+    padding: 28px 22px 26px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 
@@ -55,15 +55,18 @@ export const DateInput = styled.TextInput`
   ${({ theme }) => css`
     height: 30px;
     width: 100%;
-    font-size: ${RFValue(15)}px;
+    font-size: ${RFValue(13)}px;
+    text-align: center;
     font-family: ${theme.fonts.inter_500};
     color: ${theme.colors.text_light};
   `}
 `;
 
 export const Content = styled.View`
+  flex: 0.9;
 `;
 
 export const WrapperButton = styled.View`
   padding: 10px 20px 16px;
+  background-color: ${({ theme }) => theme.colors.background_secondary};
 `;

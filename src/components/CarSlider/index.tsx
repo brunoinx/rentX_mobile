@@ -38,10 +38,15 @@ export function CarSlider({ imgUrl }: Props) {
       </S.GroupDotsIndex>
 
       <S.ContentImage>
-        <S.CarImage
-          source={{ uri: imgUrl[0] }}
-          resizeMode="contain"
-        />
+        {imgUrl.map((img, idx) => (
+          idx === 0 && (
+            <S.CarImage
+              key={img}
+              source={{ uri: img }}
+              resizeMode="contain"
+            />
+          )
+        ))}
       </S.ContentImage>
     </S.Container>
   );

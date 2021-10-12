@@ -1,28 +1,40 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Button } from '../../components/Button';
 import { Acessory } from '../../components/Acessory';
 import { CarSlider } from '../../components/CarSlider';
 import { BackButton } from '../../components/BackButton';
 
-import Lambo from '../../assets/images/Lambo.png';
-
-import SpeedSvg from '../../assets/icons/speed.svg';
-import UpSvg from '../../assets/icons/up.svg';
-import StrenghtSvg from "../../assets/icons/strenght.svg";
-import GasolineSvg from '../../assets/icons/gas.svg';
-import GearSvg from '../../assets/icons/gear.svg';
-import UserSvg from '../../assets/icons/user.svg';
+import { CarProps } from '../../dtos/CarDTO';
+import { maskMoney } from '../../utils/maskMoney';
+import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
+import { formattedDate } from '../../utils/formattedDate';
 
 import * as S from './styles';
 
 type CarDetailsProps = {
 }
 
+type Params = {
+  car: CarProps;
+  dates: string[];
+}
+
 export function SchedulingDetails({ }: CarDetailsProps) {
   const { navigate } = useNavigation();
+  const { params } = useRoute();
+  const { car, dates } = params as Params;
+
+  const [firstDate, lastDate] = dates.filter((date, idx) => {
+    if (idx === 0 || idx === dates.length - 1) {
+      return date;
+    }
+  });
+
+  const priceFormatted = maskMoney(car.rent.price);
+  const rentTotal = maskMoney(car.rent.price * dates.length);
 
   return (
     <S.Container>
@@ -31,28 +43,29 @@ export function SchedulingDetails({ }: CarDetailsProps) {
         <BackButton onPress={() => { }} />
       </S.Header>
 
-      <CarSlider imgUrl={[Lambo]} />
+      <CarSlider imgUrl={car.photos} />
 
       <S.Content>
         <S.Detail>
           <S.Wrapper>
-            <S.Label>Lamborghini</S.Label>
-            <S.ModelText>Huracan</S.ModelText>
+            <S.Label>{car.brand}</S.Label>
+            <S.ModelText>{car.name}</S.ModelText>
           </S.Wrapper>
 
           <S.Wrapper>
-            <S.Label>Ao dia</S.Label>
-            <S.PriceText>R$ 580</S.PriceText>
+            <S.Label>{car.rent.period}</S.Label>
+            <S.PriceText>{priceFormatted}</S.PriceText>
           </S.Wrapper>
         </S.Detail>
 
         <S.WrapperAcessory>
-          <Acessory name="380km/h" icon={SpeedSvg} />
-          <Acessory name="3.2s" icon={UpSvg} />
-          <Acessory name="800 HP" icon={StrenghtSvg} />
-          <Acessory name="Gasolina" icon={GasolineSvg} />
-          <Acessory name="Auto" icon={GearSvg} />
-          <Acessory name="2 pessoas" icon={UserSvg} />
+          {car.accessories.map(acessory => (
+            <Acessory
+              key={acessory.type}
+              name={acessory.name}
+              icon={getAcessoryIcon(acessory.type)}
+            />
+          ))}
         </S.WrapperAcessory>
 
         <S.RentalPeriod>
@@ -62,24 +75,26 @@ export function SchedulingDetails({ }: CarDetailsProps) {
 
           <S.DateInfo>
             <S.DateTitle>De</S.DateTitle>
-            <S.DateValue>18/06/2021</S.DateValue>
+            <S.DateValue>{formattedDate(firstDate)}</S.DateValue>
           </S.DateInfo>
 
           <S.Arrow />
 
           <S.DateInfo>
             <S.DateTitle>Até</S.DateTitle>
-            <S.DateValue>20/06/2021</S.DateValue>
+            <S.DateValue>{formattedDate(lastDate)}</S.DateValue>
           </S.DateInfo>
         </S.RentalPeriod>
 
         <S.RentalPrice>
           <S.WrapperInfoTotal>
             <S.LabelTotal>Total</S.LabelTotal>
-            <S.PriceQuota>R$ 580 x3 diárias</S.PriceQuota>
+            <S.PriceQuota>
+              {`${maskMoney(car.rent.price)} x${dates.length} diárias`}
+            </S.PriceQuota>
           </S.WrapperInfoTotal>
 
-          <S.PriceTotal>R$ 2.900</S.PriceTotal>
+          <S.PriceTotal>{rentTotal}</S.PriceTotal>
         </S.RentalPrice>
       </S.Content>
 
