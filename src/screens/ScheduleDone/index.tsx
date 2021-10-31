@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export function ScheduleDone() {
   const { width } = useWindowDimensions();
-  const { navigate } = useNavigation();
+  const { reset } = useNavigation();
   const formatWidth = Math.round(width);
 
   return (
@@ -36,7 +36,11 @@ export function ScheduleDone() {
           pegar o seu automóvel.
         </S.Description>
 
-        <DoneButton title='OK' onPress={() => navigate('Home')} />
+        <DoneButton title='OK' onPress={() => {
+          reset({
+            routes: [{ name: 'Home' }, { name: 'MyCars' }]
+          })
+        }} />
       </S.Content>
     </S.Container>
   );

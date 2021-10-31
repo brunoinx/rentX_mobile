@@ -61,18 +61,14 @@ export function Scheduling() {
     setRentalPeriod({
       startFormatted: format(addDays(new Date(firstDate), 1), 'dd/MM/yyyy'),
       endFormatted: format(addDays(new Date(endDate), 1), 'dd/MM/yyyy')
-    })
+    });
   }
 
   function handleConfirmRental() {
-    if (!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {
-      Alert.alert('Ops', 'selecione um período para alugar.')
-    } else {
-      navigate('SchedulingDetails', {
-        car,
-        dates: Object.keys(markedDates),
-      });
-    }
+    navigate('SchedulingDetails', {
+      car,
+      dates: Object.keys(markedDates),
+    });
   }
 
   return (
@@ -122,7 +118,12 @@ export function Scheduling() {
           </S.Content>
 
           <S.WrapperButton>
-            <Button title="Confirmar" onPress={handleConfirmRental} />
+            <Button
+              title="Confirmar Período"
+              onPress={handleConfirmRental}
+
+              enabled={!!rentalPeriod.startFormatted}
+            />
           </S.WrapperButton>
         </S.Container>
       </TouchableWithoutFeedback>

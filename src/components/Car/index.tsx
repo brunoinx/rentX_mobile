@@ -1,19 +1,19 @@
 import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
-import { SvgProps } from 'react-native-svg';
 
 import { CarProps } from '../../dtos/CarDTO';
 import { maskMoney } from '../../utils/maskMoney';
+import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
 
 import * as S from './styles';
 
 type Props = TouchableOpacityProps & {
   data: CarProps;
-  icon: React.FC<SvgProps>;
 }
 
-export function Car({ data, icon: Icon, ...rest }: Props) {
+export function Car({ data, ...rest }: Props) {
   const priceFormated = maskMoney(data.rent.price);
+  const MotorIcon = getAcessoryIcon(data.fuel_type);
 
   return (
     <S.Container
@@ -32,7 +32,7 @@ export function Car({ data, icon: Icon, ...rest }: Props) {
 
           <S.WrapperIcon>
             <S.PriceText>{priceFormated}</S.PriceText>
-            <Icon
+            <MotorIcon
               height={22}
               width={22}
             />
@@ -46,3 +46,7 @@ export function Car({ data, icon: Icon, ...rest }: Props) {
     </S.Container>
   );
 };
+
+function getAccessoryIcon(fuel_type: string) {
+  throw new Error('Function not implemented.');
+}
