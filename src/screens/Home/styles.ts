@@ -2,6 +2,8 @@ import styled, { css } from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { FlatList } from "react-native";
 import { CarProps } from "../../dtos/CarDTO";
+import { RectButton } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 export const Container = styled.View`
   ${({ theme }) => css`
@@ -46,4 +48,28 @@ export const ListCar = styled(FlatList as new () => FlatList<CarProps>).attrs({
 
 export const WrapperCard = styled.View`
   margin-bottom: 14px;
+`;
+
+export const WrapperButton = styled.View`
+  position: absolute;
+  bottom: 26px;
+  right: 16px;
+`;
+
+export const MyCarButton = styled(RectButton)`
+  height: 66px;
+  width: 66px;
+  border-radius: 33px;
+
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${({ theme }) => theme.colors.main};
+`;
+
+export const CarIcon = styled(Ionicons).attrs({
+  name: "ios-car-sport",
+  size: 32,
+})`
+  color: ${({ theme }) => theme.colors.shape};
 `;
