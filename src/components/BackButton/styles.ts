@@ -6,6 +6,6 @@ export const Container = styled(BorderlessButton)``;
 
 export const Icon = styled(MaterialIcons).attrs(({ theme, color }) => ({
   name: "chevron-left",
-  size: 28,
+  size: 32,
   color: !!color ? color : theme.colors.text,
 }))``;

@@ -10,7 +10,7 @@ type Props = BorderlessButtonProps & {
 export function BackButton({ color, ...rest }: Props) {
   return (
     <S.Container {...rest}>
-      <S.Icon color={color}/>
+      <S.Icon color={color} />
     </S.Container>
   );
 };
