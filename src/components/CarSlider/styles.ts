@@ -25,7 +25,7 @@ export const Dots = styled.View<DotsProps>`
   ${({ theme, active }) => css`
     height: 6px;
     width: 6px;
-    margin-right: 4px;
+    margin-right: 8px;
     border-radius: 6px;
 
     background-color: ${active ? theme.colors.shape_dark : theme.colors.shape};

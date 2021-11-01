@@ -1,53 +1,52 @@
-import React, { useState } from 'react';
-import { ImageSourcePropType } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { FlatList, ViewToken } from 'react-native';
 
 import * as S from './styles';
 
-const dots = [
-  {
-    id: "1",
-    active: true,
-  },
-  {
-    id: "2",
-    active: false,
-  },
-  {
-    id: "3",
-    active: false,
-  },
-  {
-    id: "4",
-    active: false,
-  },
-];
-
-type Props = {
+export type SliderProps = {
   imgUrl: string[];
 }
 
-export function CarSlider({ imgUrl }: Props) {
-  const [active, setActive] = useState(false);
+type ChangeImageProps = {
+  viewableItems: ViewToken[];
+  changed: ViewToken[];
+}
+
+export function CarSlider({ imgUrl }: SliderProps) {
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const indexChanged = useRef((info: ChangeImageProps) => {
+    const index = info.viewableItems[0].index!;
+
+    setImageIndex(index);
+  })
 
   return (
     <S.Container>
       <S.GroupDotsIndex>
-        {dots.map(dot => (
-          <S.Dots key={dot.id} active={dot.active} />
+        {imgUrl.map((dot, index) => (
+          <S.Dots
+            key={dot}
+            active={index === imageIndex}
+          />
         ))}
       </S.GroupDotsIndex>
 
-      <S.ContentImage>
-        {imgUrl.map((img, idx) => (
-          idx === 0 && (
+      <FlatList
+        data={imgUrl}
+        keyExtractor={key => key}
+        renderItem={({ item }) => (
+          <S.ContentImage>
             <S.CarImage
-              key={img}
-              source={{ uri: img }}
+              source={{ uri: item }}
               resizeMode="contain"
             />
-          )
-        ))}
-      </S.ContentImage>
+          </S.ContentImage>
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        onViewableItemsChanged={indexChanged.current}
+      />
     </S.Container>
   );
 };
