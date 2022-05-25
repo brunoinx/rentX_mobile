@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { StatusBar, View } from 'react-native';
+import { StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
+  withSpring,
   withSequence,
+  useAnimatedGestureHandler,
   Easing
 } from 'react-native-reanimated';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 
 import { Car } from '../../components/Car';
+import { Load } from '../../components/Load';
 import { CarProps } from '../../dtos/CarDTO';
 
 import Logo from '../../assets/logo.svg'
 
 import * as S from './styles';
 import { api } from '../../services/api';
-import { getAcessoryIcon } from '../../utils/getAcessoryIcon';
-import { Load } from '../../components/Load';
 
 export function Home() {
   const [listCars, setListCars] = useState([]);
@@ -26,6 +29,23 @@ export function Home() {
   const navigation = useNavigation();
 
   const animatedButton = useSharedValue(0);
+  const positionX = useSharedValue(0);
+  const positionY = useSharedValue(0);
+
+  const onGestureEvent = useAnimatedGestureHandler({
+    onStart: (_, ctx: any) => {
+      ctx.positionX = positionX.value;
+      ctx.positionY = positionY.value;
+    },
+    onActive: ({ translationX, translationY }, ctx: any) => {
+      positionX.value = ctx.positionX + translationX;
+      positionY.value = ctx.positionY + translationY;
+    },
+    onEnd: () => {
+      positionX.value = withSpring(0);
+      positionY.value = withSpring(0);
+    },
+  });
 
   const jumpButton = useAnimatedStyle(() => {
     return {
@@ -36,6 +56,13 @@ export function Home() {
       ]
     }
   });
+
+  const translateButtonStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: positionX.value },
+      { translateY: positionY.value }
+    ]
+  }));
 
   useEffect(() => {
     async function fetchCars() {
@@ -64,7 +91,7 @@ export function Home() {
         duration: 300,
       }),
       withTiming(0, {
-        duration: 300,
+        duration: 500,
         easing: Easing.bounce,
       }),
     )
@@ -109,13 +136,20 @@ export function Home() {
             />
 
             <S.WrapperButton>
-              <Animated.View style={jumpButton}>
-                <S.MyCarButton
-                  onPress={handleNavigateToMyCars}
-                >
-                  <S.CarIcon />
-                </S.MyCarButton>
-              </Animated.View>
+              <PanGestureHandler
+                onGestureEvent={onGestureEvent}
+              >
+                <Animated.View style={[
+                  jumpButton,
+                  translateButtonStyle
+                ]}>
+                  <S.MyCarButton
+                    onPress={handleNavigateToMyCars}
+                  >
+                    <S.CarIcon />
+                  </S.MyCarButton>
+                </Animated.View>
+              </PanGestureHandler>
             </S.WrapperButton>
           </>
         )

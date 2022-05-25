@@ -4,10 +4,9 @@ import { RFValue } from "react-native-responsive-fontsize";
 
 export const Container = styled(TouchableOpacity)`
   ${({ theme }) => css`
-    width: 100%;
-    height: 126px;
-    padding: 16px 24px;
-    
+    flex: 1;
+    padding: 8px 24px;
+
     flex-direction: row;
     justify-content: space-between;
     background-color: ${theme.colors.background_secondary};
@@ -20,13 +19,15 @@ export const Details = styled.View`
   justify-content: space-between;
 `;
 
-export const ContentCar = styled.View``
+export const ContentCar = styled.View`
+  justify-content: center;
+`;
 
 export const ImageCar = styled.Image.attrs({
-  resizeMode: 'stretch'
+  resizeMode: "stretch",
 })`
-  height: 87px;
-  width: 168px;
+  height: 86px;
+  width: 158px;
 `;
 
 export const WrapperInfoCar = styled.View`

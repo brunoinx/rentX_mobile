@@ -57,8 +57,8 @@ export const WrapperButton = styled.View`
 `;
 
 export const MyCarButton = styled(RectButton)`
-  height: 66px;
-  width: 66px;
+  height: 60px;
+  width: 60px;
   border-radius: 33px;
 
   justify-content: center;
@@ -69,7 +69,7 @@ export const MyCarButton = styled(RectButton)`
 
 export const CarIcon = styled(Ionicons).attrs({
   name: "ios-car-sport",
-  size: 32,
+  size: 28,
 })`
   color: ${({ theme }) => theme.colors.shape};
 `;
